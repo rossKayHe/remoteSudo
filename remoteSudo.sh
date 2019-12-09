@@ -9,11 +9,6 @@ function usage {
   exit
 }
 
-# install sshpass if not already ibnstalled
-if [ ! echo $2 | sudo -S yum list sshpass | grep 'Installed Packages' ]; then
-  echo $2 | sudo -S yum install sshpass -yum
-fi
-
 # Check number of arguments
 if  [ "$#" -ne 4 ]; then
   usage
@@ -26,6 +21,11 @@ elif [[ $4 == *"/"* ]]; then
   IFS=$'\n' read -d '' -r -a hosts < $4
 else
   usage
+fi
+
+# install sshpass if not already ibnstalled
+if [ ! echo $2 | sudo -S yum list sshpass | grep 'Installed Packages' ]; then
+  echo $2 | sudo -S yum install sshpass -yum
 fi
 
 # Run remote sudo command on list of hosts
