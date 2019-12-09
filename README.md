@@ -10,7 +10,7 @@ Requires sshpass
 Install with<br>
 `  yum install sshpass -y`
 
-## Issue
+## Issues
 
   
 ## Testing results
