@@ -23,9 +23,9 @@ else
   usage
 fi
 
-# install sshpass if not already ibnstalled
-if [ ! echo $2 | sudo -S yum list sshpass | grep 'Installed Packages' ]; then
-  echo $2 | sudo -S yum install sshpass -yum
+# install sshpass if not already installed
+if [[ ! $(echo $2 | sudo -S yum list sshpass | grep 'Installed Packages') ]]; then
+  echo $2 | sudo -S yum install sshpass -y
 fi
 
 # Run remote sudo command on list of hosts
