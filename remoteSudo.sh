@@ -31,5 +31,6 @@ fi
 # Run remote sudo command on list of hosts
 for h in "${hosts[@]}"
 do
+  echo $h
   sshpass -p $PWD ssh  -o "StrictHostKeyChecking no" $1@$h "echo $PWD | sudo -S $2"
 done
