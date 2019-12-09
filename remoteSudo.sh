@@ -1,35 +1,35 @@
 #!/bin/bash
 user=$1
-pwd=$2
-cmd=$3
-host=$4
+cmd=$2
+host=$3
+read -p 'Password: ' -s PWD
 
 function usage {
-  echo "Usage remoteSudo.sh <user> <password> <command> <host file||comma delimited list>"
+  echo "Usage remoteSudo.sh <user> <command> <host file||comma delimited list>"
   exit
 }
 
 # Check number of arguments
-if  [ "$#" -ne 4 ]; then
+if  [ "$#" -ne 3 ]; then
   usage
 fi
 
 # Check for comma delimited list or filename
-if [[ $4 == *[,]* ]]; then
-  IFS=',' read -r -a hosts <<< "$4"
-elif [[ $4 == *"/"* ]]; then
-  IFS=$'\n' read -d '' -r -a hosts < $4
+if [[ $3 == *[,]* ]]; then
+  IFS=',' read -r -a hosts <<< "$3"
+elif [[ $3 == *"/"* ]]; then
+  IFS=$'\n' read -d '' -r -a hosts < $3
 else
   usage
 fi
 
-# install sshpass if not already installed
-if [[ ! $(echo $2 | sudo -S yum list sshpass | grep 'Installed Packages') ]]; then
-  echo $2 | sudo -S yum install sshpass -y
+# install sshpass if not already ibnstalled
+if [ ! echo $PWD | sudo -S yum list sshpass | grep 'Installed Packages' ]; then
+  echo $PWD | sudo -S yum install sshpass -yum
 fi
 
 # Run remote sudo command on list of hosts
 for h in "${hosts[@]}"
 do
-  sshpass -p $2 ssh  -o "StrictHostKeyChecking no" $1@$h "echo $2 | sudo -S $3"
+  sshpass -p $PWD ssh  -o "StrictHostKeyChecking no" $1@$h "echo $PWD | sudo -S $2"
 done
