@@ -12,6 +12,10 @@ Install with<br>
 
 ## Limitations
 The bash script only runs one command with sudo.  Any further commands separated with a semicolon or && do not get the sudo permissions.
+
+This could be worked around by splitting the command on semicolon and do a for loop on the resultant commands.
+
+The PoshSSH script does not have this same limitation.
   
 ## Testing results
 <pre>amko@y0319t11229:~$ ./remoteSudo.sh amko 'ls /etc/audit' ./hosts
