@@ -10,8 +10,8 @@ Requires sshpass
 Install with<br>
 `  yum install sshpass -y`
 
-## Issues
-
+## Limitations
+The bash script only runs one command with sudo.  Any further commands separated with a semicolon or && do not get the sudo permissions.
   
 ## Testing results
 <pre>amko@y0319t11229:~$ ./remoteSudo.sh amko 'ls /etc/audit' ./hosts
