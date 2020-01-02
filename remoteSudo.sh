@@ -38,7 +38,7 @@ if [[ $cmd == *";"* ]]; then
     echo $h
     for cmd1 in "${arrCMD[@]}"
     do
-      sshpass -p $PWD ssh  -o "StrictHostKeyChecking no" $user@$h "echo $PWD | sudo -S $cmd1"
+      sshpass -p $PWD ssh  -o StrictHostKeyChecking=no $user@$h "echo $PWD | sudo -S $cmd1"
     done
   done
 else
@@ -46,6 +46,6 @@ else
   for h in "${hosts[@]}"
   do
     echo $h
-    sshpass -p $PWD ssh  -o "StrictHostKeyChecking no" $user@$h "echo $PWD | sudo -S $cmd"
+    sshpass -p $PWD ssh  -o StrictHostKeyChecking=no $user@$h "echo $PWD | sudo -S $cmd"
   done
 fi
