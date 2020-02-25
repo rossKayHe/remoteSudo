@@ -30,7 +30,7 @@ fi
 
 # Check if command is has semicolon separators
 if [[ $cmd == *";"* ]]; then
-  arrCMD=(${cmd//;/ })
+  IFS=';' read -a arrCMD <<<$cmd
   # Run remote sudo commands on list of hosts
   for h in "${hosts[@]}"
   do
